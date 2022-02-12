@@ -31,5 +31,6 @@ def variable_view(request, pk):
 
     if request.method == 'PUT':
         variable_dto = vl.update_variable(pk, json.loads(request.body))
+        print(type(variable_dto))
         variable = serializers.serialize('json', [variable_dto,])
         return HttpResponse(variable, 'application/json')

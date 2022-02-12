@@ -10,11 +10,12 @@ def get_variable(var_pk):
 
 def update_variable(var_pk, new_var):
     variable = get_variable(var_pk)
-    variable.name = new_var["name"]
+    variable.name = new_var["fields"]["name"]
     variable.save()
     return variable
 
 def create_variable(var):
-    variable = Variable(name=var["name"])
+    print(var)
+    variable = Variable(name=var["fields"]["name"])
     variable.save()
     return variable
