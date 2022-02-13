@@ -1,12 +1,26 @@
 {
 	"info": {
-		"_postman_id": "1d9a3221-6183-4de0-a3e1-f80a0e0a3c17",
+		"_postman_id": "9712c06f-45cc-403d-a44b-792e19d833f0",
 		"name": "Monitoring",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Create Variable",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"new_variable\",data[0].pk);\r",
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;\r",
+							"console.log(data[0].pk);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -98,6 +112,19 @@
 		},
 		{
 			"name": "Retrive Variables",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data= JSON.parse(responseBody);\r",
+							"tests[\"No genera error en el Get All\"] = responseCode.code === 200;\r",
+							"tests[\"variables count\"] = data.length > 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -114,7 +141,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}:{{port}}{{api_path}}/variables?id=3",
+					"raw": "{{host}}:{{port}}{{api_path}}/variables?id={{new_variable}}",
 					"host": [
 						"{{host}}"
 					],
@@ -125,7 +152,7 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "3"
+							"value": "{{new_variable}}"
 						}
 					]
 				}
@@ -136,15 +163,6 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{host}}:{{port}}{{api_path}}/variables",
 							"host": [
@@ -204,15 +222,6 @@
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{host}}:{{port}}{{api_path}}/variables?id=3",
 							"host": [
@@ -270,6 +279,19 @@
 		},
 		{
 			"name": "Update Variable",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -283,14 +305,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}:{{port}}{{api_path}}/variables/3",
+					"raw": "{{host}}:{{port}}{{api_path}}/variables/{{new_variable}}",
 					"host": [
 						"{{host}}"
 					],
 					"port": "{{port}}{{api_path}}",
 					"path": [
 						"variables",
-						"3"
+						"{{new_variable}}"
 					]
 				}
 			},
@@ -361,18 +383,31 @@
 		},
 		{
 			"name": "Retrive Variable",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}:{{port}}{{api_path}}/variables/1",
+					"raw": "{{host}}:{{port}}{{api_path}}/variables/{{new_variable}}",
 					"host": [
 						"{{host}}"
 					],
 					"port": "{{port}}{{api_path}}",
 					"path": [
 						"variables",
-						"1"
+						"{{new_variable}}"
 					]
 				}
 			},
