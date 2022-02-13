@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "5661cc4c-8b15-437f-a882-60aa16a6669f",
+		"name": "POST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Measurments",
+			"item": [
+				{
+					"name": "Crear una medida",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verificar que exista la pk: \", function(){",
+									"    pm.response.to.have.jsonBody(\"pk\");",
+									"    pm.environment.unset(\"id\");",
+									"    var json = JSON.parse(responseBody);",
+									"    postman.setEnvironmentVariable(\"id\", `${json.pk}`)",
+									"})",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"measurements.measurement\",\n    \"pk\": 12,\n    \"fields\": {\n        \"variable\": 1,\n        \"value\": 34.0,\n        \"unit\": \"C\",\n        \"place\": \"ML-209\",\n        \"dateTime\": \"2022-02-12T22:34:20.662Z\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/measurements/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"measurements",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar todas las medidas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/measurements",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"measurements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar una medida dada su id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/measurements/{{id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"measurements",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cambiar una medida dado su identificador",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"model\": \"measurements.measurement\",\n    \"pk\": {{id}},\n    \"fields\": {\n        \"variable\": 1,\n        \"value\": 234.0,\n        \"unit\": \"C\",\n        \"place\": \"ML-208\",\n        \"dateTime\": \"2022-02-13T20:07:50.330Z\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/measurements/{{id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"measurements",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar una medida dada su id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/measurements/{{id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"measurements",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
