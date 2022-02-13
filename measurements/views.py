@@ -3,6 +3,7 @@ from .logic import measurements_logic as ml
 from django.http import HttpResponse
 from django.core import serializers
 import json
+from django.views.decorators.csrf import csrf_exempt
 
 
 @csrf_exempt
@@ -22,6 +23,7 @@ def measurements_view(request):
         measurement = serializers.serialize('json', [measurement_dto,])
         return HttpResponse(measurement,'application/json')
 # Create your views here.
+@csrf_exempt
 def  measurement_view(request,pk):
     if request.method =='GET':
         measurement_dto =  ml.get_measurement(pk)
