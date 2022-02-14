@@ -10,6 +10,8 @@ GET BY ID
 
 CREATE
 
+![Captura de pantalla (510)](https://user-images.githubusercontent.com/69642359/153802478-77a4b1b7-7e7f-437a-a43d-14c19bf10452.png)
+![Captura de pantalla (511)](https://user-images.githubusercontent.com/69642359/153802549-b7e69562-d831-4bb2-8ca7-39813ee9e656.png)
 
 
 
