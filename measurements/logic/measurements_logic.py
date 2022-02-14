@@ -1,4 +1,4 @@
-import measurements
+
 from ..models import Measurement
 def get_measurement(var_pk):
     measurement = Measurement.objects.get(pk=var_pk)
@@ -10,8 +10,16 @@ def get_measurements():
 def create_measurement(var):
     measurement = Measurement(variable=var["variable"],value=var["value"],unit=var["unit"],place=var["place"],dateTime=var["dateTime"])
     measurement.save()
-def update_measurement(var_pk,new_var):
+    
+def update_measurement(var_pk,new_plc):
     measurement = get_measurement(var_pk)
-    measurement.unit =new_var["unit"]
+    measurement.value =new_plc["value"]
+    measurement.unit =new_plc["unit"]
+    measurement.place =new_plc["place"]
     measurement.save()
+    return measurement
+
+def delete_measurements(var_pk):
+    measurement = get_measurement(var_pk)
+    measurement.delete()
     return measurement
